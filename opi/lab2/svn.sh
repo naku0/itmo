@@ -11,6 +11,7 @@ mkdir -p "$SVN_REPO" "$WORKING_DIR"
 # Инициализация репозитория
 svnadmin create "$SVN_REPO"
 svn mkdir "file://$SVN_REPO/trunk" "file://$SVN_REPO/branches" "file://$SVN_REPO/tags" -m "лооол"
+svnserve -d -r "$SVN_REPO"
 
 # 0 -- init коммит (красный юзер)
 svn checkout "file://$SVN_REPO/trunk" "$WORKING_DIR/trunk"
@@ -118,11 +119,8 @@ svn resolve --accept working jYzbZGr65h.ldT
 cp -r "$COMMITS_DIR/14"/* .
 svn add --force .
 
-svn delete F.java.merge-left.r4
 svn delete F.java.working
-svn delete K.java.merge-left.r4
 svn delete K.java.working
-svn delete K.java.merge-right.r4
 
 svn commit --username red_user -m "коммит14 твоя следующая фраза -- мердж конфликт"
 
